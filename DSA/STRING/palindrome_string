@@ -1,0 +1,17 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+// Function to check if a string is a palindrome
+int isPalindrome(string & s){
+  
+    // If reverse string is equal to given string,
+    // then it is palindrome.
+    return s == string(s.rbegin(), s.rend()) ? 1 : 0;
+}
+
+int main(){
+    string s = "abba";
+    cout << isPalindrome(s) << endl;
+
+    return 0;
+}

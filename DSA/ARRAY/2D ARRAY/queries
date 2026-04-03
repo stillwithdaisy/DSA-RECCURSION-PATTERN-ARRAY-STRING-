@@ -1,0 +1,46 @@
+#include <iostream>
+#include<vector>
+using namespace std;
+
+void solveQueries(int m, int n, vector<vector<int>> &query) {
+
+    // create two arrays rows and cols
+    // and fill the value from 0 to size-1
+    vector<int> rows(m), cols(n);
+    for(int i = 0; i < m; i++) {
+        rows[i] = i;
+    }
+    for(int i = 0; i < n; i++) {
+        cols[i] = i;
+    }
+
+    for (int i = 0; i < query.size(); i++) {
+
+        // type 1
+        if (query[i][0] == 1) {
+            swap(rows[query[i][1]], rows[query[i][2]]);
+        }
+
+        // type 2
+        else if (query[i][0] == 2) {
+            swap(cols[query[i][1]], cols[query[i][2]]);
+        }
+
+        // type 3
+        else {
+            cout<< (rows[query[i][1]] * n) + cols[query[i][2]] + 1 << " ";
+        }
+    }
+}
+
+int main() {
+    int m = 3, n = 3;
+    vector<vector<int>> query = {{1, 0, 1},
+                                 {3, 0, 0},
+                                 {3, 1, 0},
+                                 {2, 0, 1},
+                                 {3, 0, 0},
+                                 {3, 1, 0}};
+    solveQueries(m, n, query);
+    return 0;
+}

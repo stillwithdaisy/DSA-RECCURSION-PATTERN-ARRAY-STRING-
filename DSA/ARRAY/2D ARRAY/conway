@@ -1,0 +1,71 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+// Function to find the next generation
+int findNextGen(vector<vector<int>> &mat) {
+    int m = mat.size(), n = mat[0].size();
+
+    // Directions of eight possible neighbors
+    vector<vector<int>> directions = 
+    {{0, 1}, {1, 0}, {0, -1}, {-1, 0}, {1, 1}, {-1, -1}, {1, -1}, {-1, 1}};
+
+    // Iterate over the matrix
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+
+            // Count the number of live neighbors
+            int live = 0;
+            for (auto dir : directions) {
+                int x = i + dir[0];
+                int y = j + dir[1];
+
+                // Check if the neighbor is live
+                if (x >= 0 && x < m && y >= 0 && y < n && 
+                    (mat[x][y] == 1 || mat[x][y] == 3)) {
+                    live++;
+                }
+            }
+
+            // If current cell is live and number of live neighbors
+            // is less than 2 or greater than 3, then the cell will die
+            if (mat[i][j] == 1 && (live < 2 || live > 3)) {
+                mat[i][j] = 3;
+            }
+
+            // If current cell is dead and number of live neighbors
+            // is equal to 3, then the cell will become live
+            else if (mat[i][j] == 0 && live == 3) {
+                mat[i][j] = 2;
+            }
+        }
+    }
+
+    // Update the matrix with the next generation
+    // and print the results.
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+
+            // value 2 represents the cell is live
+            if (mat[i][j] == 2) {
+                mat[i][j] = 1;
+            }
+
+            // value 3 represents the cell is dead
+            if (mat[i][j] == 3) {
+                mat[i][j] = 0;
+            }
+
+            cout << mat[i][j] << " ";
+        }
+        cout << endl;
+    }
+}
+
+int main() {
+  
+    vector<vector<int>> mat = 
+    {{0, 0, 0, 0}, {0, 0, 1, 0}, {0, 1, 1, 0}, {0, 0, 0, 0}};
+    findNextGen(mat);
+    return 0;
+}

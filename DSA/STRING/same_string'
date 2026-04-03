@@ -1,0 +1,22 @@
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+// Function to compare two strings using strcmp
+bool areStringsSame(char s1[], char s2[]) {
+    return strcmp(s1, s2) == 0;
+}
+
+int main() {
+    char s1[] = "hello";
+    char s2[] = "hello";
+
+    // Call the areStringsSame function to compare strings
+    if (areStringsSame(s1, s2)) {
+        cout << "Yes" << endl;
+    } else {
+        cout << "No" << endl;  
+    }
+
+    return 0;
+}
